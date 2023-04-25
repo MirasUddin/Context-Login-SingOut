@@ -7,7 +7,7 @@ const auth = getAuth(app)
 
 const Register = () => {
 
-    const { singIn } = useContext(AuthContext)
+    const { singIn, singInWithGoogle } = useContext(AuthContext)
 
     const [success, setSuccess] = useState('')
     const [error, setError] = useState('')
@@ -54,6 +54,16 @@ const Register = () => {
 
     }
 
+    const handleGoogleLogin = () =>{
+        singInWithGoogle()
+        .then(result=>{
+            const loggedUser = result.user;
+            console.log(loggedUser);
+        }).catch(error =>{
+            console.log(error.message);
+        })
+    }
+
     const handleResetPassword = event => {
         const email = (emailRef.current.value);
         if (!email) {
@@ -84,6 +94,9 @@ const Register = () => {
                         <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
+                    <div className='mb-2 mt-2'>
+                        <button onClick={handleGoogleLogin}>Login With Google</button>
+                    </div>
                 </form>
                 <p>Are you forget your password? <button onClick={handleResetPassword} className='btn btn-link'>Reset Password</button></p>
                 <p><small>Are you new here? Please <Link to="/register">Register</Link> </small></p>
