@@ -24,8 +24,10 @@ const Header = () => {
                 <Link to="/login">Login</Link>
                 <Link to="/register">Register</Link>
                 <Link to="/about-us">About US</Link>
+                <Link to="/orders">Orders</Link>
+                <Link to="/profile">Profile</Link>
                 {
-                    user ? <>
+                    user?.emailVerified ? <>
                         <span>{user.email}</span>
                         <button onClick={handleSingOut}>sing Out</button>
                         </> : <Link to="/login">Login</Link>

@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, sendEmailVerification, updateProfile } from "firebase/auth";
-import app from '../firebase.config';
+import {  sendEmailVerification, updateProfile } from "firebase/auth";
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../Provider/AuthProvider';
 
@@ -12,15 +11,11 @@ const Register = () => {
     
     const [success, setSuccess] = useState('')
     const [error, setError] = useState('')
-    const [name, setName] = useState()
-
-    const auth = getAuth(app)
 
     const handleForm = event =>{
         event.preventDefault()
         const form = event.target;
         const name = form.name.value;
-        setName(name)
         const email = form.email.value;
         const password = form.password.value;
         // console.log(name, email, password);

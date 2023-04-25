@@ -10,6 +10,7 @@ export const AuthContext = createContext(null)
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     const auth = getAuth(app);
 
@@ -28,6 +29,7 @@ const AuthProvider = ({ children }) => {
 
     const authInfo = {
         user,
+        loading,
         createUser,
         singIn,
         logOut
@@ -38,6 +40,7 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
             console.log("auth state change" ,currentUser);
             setUser(currentUser)
+            setLoading(false)
         })
         return () =>{
             unsubscribe();
